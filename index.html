@@ -4,20 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!--
-    File: index.html
-    Jason Downing
-    Contact: jason@downing.io
-    MIT Licensed - see http://opensource.org/licenses/MIT for details.
-    Anyone may freely use this code. Just don't sue me if it breaks stuff.
-    Created: September 3rd, 2015.
-    Last Updated: November 13th, 2021.
-
-    Jason Downing's personal website. This site has information about him,
-    details about his education, skills, and links to his GitHub and LinkedIn
-    Profiles. This site is hosted on GitHub Pages.
-  -->
-
   <!-- Custom Title Bar -->
   <title>LIGHT AT NIGHT</title>
 
@@ -49,6 +35,26 @@
     ga('create', 'UA-68657454-1', 'auto');
     ga('send', 'pageview');
   </script>
+  
+  
+      <style>
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
+
+        .index_image{
+          opacity: 1;
+          filter: alpha(opacity=100);
+        }
+        .index_image:hover
+        {
+          opacity: 0.35;
+          filter: alpha(opacity=10);
+        }
+
+    </style>
+  
 
 	<!-- 
 	These are Open Graph Metadata tags, which are used by Facebook, LinkedIn and 
@@ -129,14 +135,14 @@
       <div class="row">
         <div class="col-lg-10 mx-auto">
           <h1 class="text-uppercase">
-            <strong>Jason Downing</strong>
+            <strong>LIGHT AT NIGHT</strong>
           </h1>
           <hr class="divider my-4" />
         </div>
         <div class="col-lg-8 mx-auto">
           <p class="text-faded text-black mb-5">Investigate the geospatial pattern of LAN in US counties from 2012 to 2019</p>
           <p class="text-italic font-weight-bold mb-5">
-            ALAN</a>
+            UT Health SPH</a>
           </p>
           <a class="btn btn-primary btn-xl js-scroll-trigger" href="#map">Explore!</a>
         </div>
@@ -144,52 +150,83 @@
     </div>
   </header>
 
-  <!-- Education Section -->
-  <section class="page-section bg-primary">
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 mx-auto text-center mb-4">
-          <h2 class="section-heading text-white" id="map">Map</h2>
-          <hr class="divider light my-4" />
+ <!-- About Section -->
+    <section id="map" style=" background: -webkit-gradient(linear, left top, left bottom, from(#161616), color-stop(75%, rgba(22, 22, 22, 0.9)), to(rgba(22, 22, 22, 0.8)));
+  background: linear-gradient(to bottom, #161616 0%, rgba(22, 22, 22, 0.9) 75%, rgba(22, 22, 22, 0.8) 100%);">
+      <div class="container" style="width: 100%;">
+        <div class="row" style="width: 100%; margin: auto;">
+          <div class="row" style="width: 100%; margin: auto;">
+            <div style="font-size:12px; color: white; margin: auto;">The light at night is colored by mean radiance. <b>Pan</b> and <b>zoom</b> to see heat maps in different cities. <b>Search your address</b></div>
+          </div>
+
+          <div class="row" style="width: 100%; margin: auto;">
+              <div class="dropdown my-menu" >       
+                <select id="city" onchange="leaveChange(this)">
+                  <option value="atlanta">Atlanta</option>
+                  <option value="baltimore">Baltimore</option>
+                  <option value="boston">Boston</option>
+                  <option value="chicago">Chicago</option>
+                  <option value="dallas">Dallas</option>
+                  <option value="houston">Houson</option>
+                  <option value="los angeles">Los Angeles</option>
+                  <option value="miami">Miami</option>
+                  <option value="new york city">New York City</option>
+                  <option value="philadelphia" selected>Philadelphia</option>
+                  <option value="san francisco">San Francisco</option>
+                  <option value="seattle">Seattle</option>
+                  <option value="san diego">San Diego</option>
+                  <option value="washington">Washington, DC</option>
+                </select>
+              </div>
+          </div>
+          
+
+          <div class="main"  id="map" style="width: 100%; height: 600px; margin:auto"> 
+            <div id="menu" style="color: black; height: 40px; width: 20%">
+              <!-- See a list of Mapbox-hosted public styles at -->
+              <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+              <input id="satellite" class="radio" type="radio" name="rtoggle" value="light">
+              <label for="satellite">satellite</label>
+              <input id="heat" type="radio" name="rtoggle" value="dark" checked>
+              <label for="heat">heat map</label>
+              
+              <div id="geocoder" class="geocoder"></div>
+
+              <div class="flex-parent viewport-full relative scroll-hidden">
+                <div class="flex-child w-full w240-mm absolute static-mm left bottom">
+                  <div
+                    class="
+                      flex-parent flex-parent--column
+                      viewport-third
+                      h-full-mm
+                      hmax-full
+                      bg-white
+                      scroll-auto
+                    "
+                  >
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="map-overlay">
+                  <div class="map-overlay-inner">
+                      <h5>Mean Radiance</h5>
+                      <div id="legend" class="legend">
+                          <nav id = 'legendbrick' class='legend clearfix'>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mb-4">
-          <i class="fa fa-4x fa-id-card-o text-faded sr-icons"></i>
-          <h3 class="text-white">Degree</h3>
-          <p class="text-faded">Bachelor of Science in Computer Science from<br/>
-          <a class="text-white-link" href="https://www.uml.edu/" class="text-blue">UMass Lowell</a></p>
-        </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center div-padding-fix mb-4">
-          <i class="fa fa-4x fa-graduation-cap text-faded sr-icons"></i>
-          <h3 class="text-white">Graduation</h3>
-          <p class="text-faded">Graduated with a 3.4 GPA & Latin Honors</p>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mb-4">
-          <i class="fa fa-4x fa-code text-faded sr-icons"></i>
-          <h3 class="text-white">Languages</h3>
-          <p class="text-faded no-margin">Python, C#, Java, JavaScript, <del>C / C++</del></p>
-          <p class="text-faded">HTML5 (HTML/CSS/JS)</p>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mb-4">
-          <i class="fa fa-4x fa-file-code-o text-faded sr-icons"></i>
-          <h3 class="text-white">Skills</h3>
-					<p class="text-faded">HTML5 / Angular / Vue.js Front end</p>
-          <p class="text-faded no-margin">C# .NET Back end</p>
-					<p class="text-faded"><del>Embedded Systems</del></p>
-        </div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#analysis">Check Our Analysis!</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      
+    </section>
 
   <!-- Analysis Section. -->
   <section class="page-section">
@@ -325,10 +362,10 @@
 
 				<!-- Some code I wrote to download Deep Dreams off of DeepDreamGenerator -->
         <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://github.com/JasonD94/DeepDreams">
+          <a class="portfolio-box" href="https://github.com/yuelyu21/ALAN">
             
 						<!--  Same photo as the header, but resized. -->
-            <img class="img-responsive" width="100%" height="auto" src="img/portfolio/thumbnails/deep-dreams.jpg" alt="">
+            <img class="img-responsive" width="100%" height="auto" src="img/portfolio/thumbnails/2014raw.jpg" alt="">
             <div class="portfolio-box-caption">
               <div class="portfolio-box-caption-content">
                 <div class="project-category text-faded">
@@ -379,10 +416,10 @@
 
         <!-- Source code for this website => downing.io -->
         <div class="col-lg-4 col-sm-6">
-          <a class="portfolio-box" href="https://github.com/JasonD94/jasond94.github.io">
+          <a class="portfolio-box" href="https://github.com/yuelyu21/COVID-19">
             
 						<!--  Same photo as the header, but resized. -->
-            <img class="img-responsive" width="100%" height="auto" src="img/portfolio/thumbnails/downing-io.jpg" alt="">
+            <img class="img-responsive" width="100%" height="auto" src="img/portfolio/thumbnails/coronavirus.jpg" alt="">
             <div class="portfolio-box-caption">
               <div class="portfolio-box-caption-content">
                 <div class="project-category text-faded">downing.io</div>
@@ -453,13 +490,8 @@
           <h2 class="section-heading">
           
           <!-- Attempting to avoid spam by removing @ and the dot in my domain -->
-            Contact Jason</h2>
+            Contact Us</h2>
           <hr class="divider black my-4" />
-          <p>If you have an interesting opportunity in the <strong>Boston area</strong> (Jason is <strong>not</strong> interested in relocating), you
-            can send (no spam plz 🙁) him a message using the form below.</p>
-					
-					<p>Please be sure to provide the company name and JD if you expect to hear back from Jason. 
-					He's gotten hundreds of messages (<a href="https://github.com/JasonD94/LinkedIn-Data-Formater">proof</a>) and won't respond to junk mail. 🙃</p>
           
           <!-- Really avoiding spam by sending emails to the spam box
                Docs URL: https://formspree.io/ 
@@ -469,32 +501,18 @@
 							!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 					-->
           <form action="https://formspree.io/mdopovkv" method="POST" class="form-horizontal" role="form">
-            <!-- Need a name, reply to email, and a message -->
-            <div class="form-group">
-              <input type="text" name="name" placeholder="Your Name" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Your Email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <textarea name="message" placeholder="Your message" class="form-control" required></textarea>
-            </div>
+
             <!-- Hidden elements here -->
             <input type="hidden" name="_subject" value="New email from Contact Me Form!" class="form-control">
             <input type="hidden" name="_next" value="thanks.html" />
             <!-- Submit button -->
             <div class="form-group">
-              <input type="submit" value="Email Jason" class="btn btn-primary btn-xl">
+              <input type="submit" value="Email US" class="btn btn-primary btn-xl">
             </div>
           </form>
         </div>
       </div>
       
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <p>You can also find his personal email, LinkedIn and GitHub below too.</p>
-        </div>
-      </div>
       
       <!-- Email, LinkedIn, and GitHub links -->
       <div class="row">
@@ -534,7 +552,7 @@
                    set to 1 (awesome new bootstrap 4 mb-1 class)-->
   <div class="container">
     <p class="text-center text-muted text-small mb-1">
-      Jason Downing &copy; 2015 - <span id="copyright-year"></span>. All rights reserved.
+      Yue Lyu &copy; 2022 - <span id="copyright-year"></span>. All rights reserved.
       Powered by <a href="http://www.getbootstrap.com/" class="text-blue">Bootstrap</a>.
     </p>
     <p class="text-center text-muted text-small">
