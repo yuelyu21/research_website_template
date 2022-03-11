@@ -23,8 +23,29 @@
   <!-- Index CSS -->
   <!-- <link href="css/index.css" rel="stylesheet"> -->
   <link href="css/grayscale.min.css" rel="stylesheet">
-
   
+  <!-- leaflet -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+     crossorigin="">
+    
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script> 
+
+  <!-- mapbox -->
+ <!-- <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+  
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script> -->
+
 
   <!-- Custom favicon -->
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -41,7 +62,7 @@
   </script>
   
   
-      <style>
+   <!--   <style>
         .lorem {
             font-style: italic;
             color: #AAA;
@@ -57,7 +78,22 @@
           filter: alpha(opacity=10);
         }
 
-    </style>
+    </style> 
+    -->
+    	<style>
+		.leaflet-container {
+			height: 600px;
+			width: 1000px;
+			max-width: 100%;
+			max-height: 100%;
+	
+			
+		}
+	</style>
+	
+	<style>#map { width: 800px; height: 500px; }
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+.legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }</style>
   
 
 	<!-- 
@@ -121,16 +157,7 @@
     </div>
   </nav>
 
-  <!--  Intro Section
-
-        Originally used a header image found at the following URL:
-        https://upload.wikimedia.org/wikipedia/commons/f/f5/Free-ride.jpg
-				
-			 Now using an image I generated myself on Deep Dream Generator:
-			 (I blurred this image using Paint.net, effects -> blurs -> surface blur 
-			   radius 100 and threshold 50)
-			 https://deepdreamgenerator.com/ddream/1qe40osrt8f
-   -->
+  <!--  Intro Section -->
   <header class="masthead text-center text-black d-flex">
     <div class="container my-auto">
       <div class="row">
@@ -151,83 +178,138 @@
     </div>
   </header>
 
- <!-- About Section -->
-    <section id="map" style=" background: -webkit-gradient(linear, left top, left bottom, from(#161616), color-stop(75%, rgba(22, 22, 22, 0.9)), to(rgba(22, 22, 22, 0.8)));
-  background: linear-gradient(to bottom, #161616 0%, rgba(22, 22, 22, 0.9) 75%, rgba(22, 22, 22, 0.8) 100%);">
-      <div class="container" style="width: 100%;">
-        <div class="row" style="width: 100%; margin: auto;">
-          <div class="row" style="width: 100%; margin: auto;">
-            <div style="font-size:12px; color: white; margin: auto;">The light at night is colored by mean radiance. <b>Pan</b> and <b>zoom</b> to see heat maps in different cities. <b>Search your address</b></div>
-          </div>
 
-          <div class="row" style="width: 100%; margin: auto;">
-              <div class="dropdown my-menu" >       
-                <select id="city" onchange="leaveChange(this)">
-                  <option value="atlanta">Atlanta</option>
-                  <option value="baltimore">Baltimore</option>
-                  <option value="boston">Boston</option>
-                  <option value="chicago">Chicago</option>
-                  <option value="dallas">Dallas</option>
-                  <option value="houston">Houson</option>
-                  <option value="los angeles">Los Angeles</option>
-                  <option value="miami">Miami</option>
-                  <option value="new york city">New York City</option>
-                  <option value="philadelphia" selected>Philadelphia</option>
-                  <option value="san francisco">San Francisco</option>
-                  <option value="seattle">Seattle</option>
-                  <option value="san diego">San Diego</option>
-                  <option value="washington">Washington, DC</option>
-                </select>
-              </div>
-          </div>
-          
+ <!-- Map Section -->
+ 
+ <body>
+<div id='map' style="width: 100%; height: 600px; margin:auto "></div>
 
-          <div class="main"  id="map" style="width: 100%; height: 600px; margin:auto"> 
-            <div id="menu" style="color: black; height: 40px; width: 20%">
-              <!-- See a list of Mapbox-hosted public styles at -->
-              <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
-              <input id="satellite" class="radio" type="radio" name="rtoggle" value="light">
-              <label for="satellite">satellite</label>
-              <input id="heat" type="radio" name="rtoggle" value="dark" checked>
-              <label for="heat">heat map</label>
-              
-              <div id="geocoder" class="geocoder"></div>
+<script type="text/javascript" src="js/us-states.js"></script>
 
-              <div class="flex-parent viewport-full relative scroll-hidden">
-                <div class="flex-child w-full w240-mm absolute static-mm left bottom">
-                  <div
-                    class="
-                      flex-parent flex-parent--column
-                      viewport-third
-                      h-full-mm
-                      hmax-full
-                      bg-white
-                      scroll-auto
-                    "
-                  >
-                  </div>
-                </div>
+<script type="text/javascript">
 
-              </div>
+	var map = L.map('map').setView([37.8, -96], 4);
 
-              <div class="map-overlay">
-                  <div class="map-overlay-inner">
-                      <h5>Mean Radiance</h5>
-                      <div id="legend" class="legend">
-                          <nav id = 'legendbrick' class='legend clearfix'>
-                      </div>
-                  </div>
-              </div>
+	var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoieXVlbHl1ODg4IiwiYSI6ImNsMG1iamhpZzE0eDEzbHFrMmpubmxkNjkifQ.pMkidZC0aBrPkkNhN-E9hw', {
+		maxZoom: 7,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/light-v9',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
 
-            </div>
-          </div>
+// control that shows state info on hover
+	var info = L.control();
 
-        </div>
-      </div>
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
 
-      </div>
-      
-    </section>
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+			'<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>' : 'Hover over a state');
+	};
+
+	info.addTo(map);
+
+
+	// get color depending on population density value
+	function getColor(d) {
+		return d > 1000 ? '#800026' :
+			d > 500  ? '#BD0026' :
+			d > 200  ? '#E31A1C' :
+			d > 100  ? '#FC4E2A' :
+			d > 50   ? '#FD8D3C' :
+			d > 20   ? '#FEB24C' :
+			d > 10   ? '#FED976' : '#FFEDA0';
+	}
+
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.density)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	/* global statesData */
+	geojson = L.geoJson(statesData, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+
+
+	var legend = L.control({position: 'bottomright'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend');
+		var grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+		var labels = [];
+		var from, to;
+
+		for (var i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(
+				'<i style="background:' + getColor(from + 1) + '"></i> ' +
+				from + (to ? '&ndash;' + to : '+'));
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(map);
+
+</script>
+    
+</body>
 
   <!-- Analysis Section. -->
   <section class="page-section">
