@@ -6,7 +6,7 @@ Author URI: http://templateonweb.com/
 Licence: <a href="http://www.templateonweb.com/terms.php?v=content&contentid=152">Website Template Licence</a>
 */
 body{
-font-family: 'Abril Fatface', cursive;
+font-family: 'Arial', cursive;
    }
 h1,h2,h3,h4,h5,h6{
 padding:0;
@@ -23,7 +23,7 @@ list-style:none;
 p{
 padding:0;
 margin:0;
-font-family: 'Merriweather', serif;
+font-family: 'Arial', serif;
 }
 .space_left{
 padding-left:0; 
@@ -42,7 +42,7 @@ border:none!important;
 padding-top:5px;
 padding-bottom:5px;
 border-bottom:1px solid #e7e7e7;
-font-family: 'Merriweather', serif;
+font-family: 'Arial', serif;
  }
 .top_1 li{ 
 display:inline;
@@ -128,7 +128,7 @@ padding-right:30px;
 /********************* header ****************/
 #header{
 background:#fff;
-font-family: 'Merriweather', serif;
+font-family: 'Arial', serif;
 	}
 #header .navbar-header i{ 
 padding-right:10px;
@@ -181,7 +181,7 @@ margin-bottom:0;
    }
 .navbar-brand {
 font-size:35px;
-font-family: 'Abril Fatface', cursive;
+font-family: 'Arial', cursive;
 font-style:oblique;
 color:#333333!important;
 font-weight:bold;
@@ -190,7 +190,7 @@ font-weight:bold;
 color:#333333;
 font-size:14px;
 font-family:Garamond;
-font-family: 'Abril Fatface', cursive;
+font-family: 'Arial', cursive;
 font-style:normal;
 font-weight:bold;
 padding-left:0px;
@@ -248,7 +248,7 @@ border-bottom:1px solid #656565;
 #center .kb_caption p a {
  color: #fff;
  padding: 10px 30px 10px 30px;
- font-family: 'Abril Fatface', cursive;
+ font-family: 'Arial', cursive;
  font-weight: bold;
  letter-spacing: 2px;
  font-size: 20px;
@@ -445,7 +445,7 @@ padding-top:40px;
 #center .kb_caption p a{ 
 color:#fff;
 padding:10px 30px 10px 30px;
-font-family: 'Abril Fatface', cursive;
+font-family: 'Arial', cursive;
 font-weight:bold;
 letter-spacing:2px;
 font-size:20px;
@@ -1633,7 +1633,7 @@ border-bottom: 2px solid #003333;
  font-size:20px;
  padding-top:10px;
  padding-bottom:10px;
- color: #0bbc5a;
+ color: #5d8aa8;
  }
 .layout_4 p{ 
  color: #828590;
